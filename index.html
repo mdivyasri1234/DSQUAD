@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DECodeArena AI — Sign in</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "background":"#0f131f","surface":"#0f131f","surface-container-lowest":"#0a0e1a",
+      "surface-container-low":"#171b28","surface-container":"#1b1f2c","surface-container-high":"#262a37",
+      "on-surface":"#dfe2f3","on-surface-variant":"#c2c6d6","outline":"#8c909f","outline-variant":"#424754",
+      "primary":"#adc6ff","primary-container":"#4d8eff","on-primary-container":"#00285d",
+      "secondary":"#d0bcff","tertiary":"#4cd7f6","error":"#ffb4ab"
+    },
+    fontFamily: { sans:["Plus Jakarta Sans"], mono:["JetBrains Mono"] }
+  }}
+}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;line-height:1}
+  .bg-tactical-grid{background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:24px 24px}
+  .glow-electric{box-shadow:0 0 28px -6px rgba(77,142,255,.55)}
+</style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased min-h-screen bg-tactical-grid flex items-center justify-center p-4 relative overflow-hidden">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-tertiary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+<main class="relative w-full max-w-md">
+  <div class="text-center mb-6">
+    <div class="inline-flex items-center gap-2 text-xl font-semibold tracking-tight text-primary uppercase">
+      <span class="text-tertiary">⚔️</span><span>DECodeArena AI</span>
+    </div>
+    <p class="text-sm text-outline mt-1 font-mono">// enter the arena</p>
+  </div>
+
+  <div class="rounded-2xl bg-surface-container-low/80 backdrop-blur-md border border-white/10 p-6 sm:p-8">
+    <!-- Tabs -->
+    <div class="grid grid-cols-2 gap-1 p-1 rounded-lg bg-surface-container-lowest mb-6" role="tablist">
+      <button id="tab-signup" type="button" class="py-2 rounded-md text-sm font-semibold transition-all">Sign up</button>
+      <button id="tab-login" type="button" class="py-2 rounded-md text-sm font-semibold transition-all">Log in</button>
+    </div>
+
+    <h1 id="title" class="text-2xl font-bold tracking-tight"></h1>
+    <p id="subtitle" class="text-sm text-on-surface-variant mt-1 mb-6"></p>
+
+    <form id="auth-form" class="space-y-4" novalidate>
+      <div id="name-field">
+        <label class="block text-[11px] font-mono font-bold tracking-widest text-outline mb-1.5" for="name">FULL NAME</label>
+        <div class="relative">
+          <span class="material-symbols-outlined text-[18px] text-outline absolute left-3 top-1/2 -translate-y-1/2">person</span>
+          <input id="name" type="text" autocomplete="name" placeholder="Alex Rivera"
+            class="w-full pl-10 py-2.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg text-sm placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container"/>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] font-mono font-bold tracking-widest text-outline mb-1.5" for="email">EMAIL</label>
+        <div class="relative">
+          <span class="material-symbols-outlined text-[18px] text-outline absolute left-3 top-1/2 -translate-y-1/2">mail</span>
+          <input id="email" type="email" autocomplete="email" placeholder="you@college.edu"
+            class="w-full pl-10 py-2.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg text-sm placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container"/>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] font-mono font-bold tracking-widest text-outline mb-1.5" for="password">PASSWORD</label>
+        <div class="relative">
+          <span class="material-symbols-outlined text-[18px] text-outline absolute left-3 top-1/2 -translate-y-1/2">lock</span>
+          <input id="password" type="password" autocomplete="current-password" placeholder="Min. 6 characters"
+            class="w-full pl-10 pr-11 py-2.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg text-sm placeholder:text-outline focus:border-primary-container focus:ring-1 focus:ring-primary-container"/>
+          <button type="button" id="toggle-pw" aria-label="Show password" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface">
+            <span class="material-symbols-outlined text-[18px]">visibility</span>
+          </button>
+        </div>
+      </div>
+
+      <p id="error" role="alert" class="hidden text-sm text-error bg-error/10 border border-error/30 rounded-lg px-3 py-2"></p>
+
+      <p id="info" role="status" class="hidden text-sm text-tertiary bg-tertiary/10 border border-tertiary/30 rounded-lg px-3 py-2"></p>
+
+      <button id="submit" type="submit"
+        class="w-full py-2.5 rounded-lg bg-primary-container text-on-primary-container font-semibold hover:brightness-110 active:scale-[.98] transition-all glow-electric disabled:opacity-60">
+      </button>
+    </form>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="auth.js"></script>
+<script>
+  // Already logged in? Skip straight to the dashboard.
+  DCA.currentUser().then(u => { if (u) location.replace("dashboard.html"); });
+
+  const $ = (id) => document.getElementById(id);
+  let mode = "signup";
+
+  const activeTab = "bg-primary-container text-on-primary-container";
+  const idleTab = "text-on-surface-variant hover:text-on-surface";
+
+  function setMode(m) {
+    mode = m;
+    const signup = m === "signup";
+    $("tab-signup").className = "py-2 rounded-md text-sm font-semibold transition-all " + (signup ? activeTab : idleTab);
+    $("tab-login").className  = "py-2 rounded-md text-sm font-semibold transition-all " + (signup ? idleTab : activeTab);
+    $("name-field").classList.toggle("hidden", !signup);
+    $("title").textContent = signup ? "Create your account" : "Welcome back";
+    $("subtitle").textContent = signup ? "Join the arena and start earning XP." : "Log in to continue your streak.";
+    $("submit").textContent = signup ? "Create account" : "Log in";
+    $("password").autocomplete = signup ? "new-password" : "current-password";
+    $("error").classList.add("hidden");
+    $("info").classList.add("hidden");
+  }
+
+  $("tab-signup").onclick = () => setMode("signup");
+  $("tab-login").onclick = () => setMode("login");
+
+  $("toggle-pw").onclick = () => {
+    const p = $("password");
+    const show = p.type === "password";
+    p.type = show ? "text" : "password";
+    $("toggle-pw").firstElementChild.textContent = show ? "visibility_off" : "visibility";
+  };
+
+  $("auth-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const err = $("error"), btn = $("submit");
+    err.classList.add("hidden");
+    btn.disabled = true;
+    try {
+      if (mode === "signup") {
+        const { needsConfirm } = await DCA.signup($("name").value, $("email").value, $("password").value);
+        if (needsConfirm) {
+          $("info").textContent = "Account created! Check your email and click the confirmation link, then log in.";
+          $("info").classList.remove("hidden");
+          btn.disabled = false;
+          setMode("login");
+          $("info").classList.remove("hidden");
+          return;
+        }
+      } else {
+        await DCA.login($("email").value, $("password").value);
+      }
+      location.href = "dashboard.html";
+    } catch (ex) {
+      err.textContent = ex.message;
+      err.classList.remove("hidden");
+      btn.disabled = false;
+    }
+  });
+
+  setMode("signup");
+</script>
+</body></html>
