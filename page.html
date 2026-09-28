@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DECodeArena AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section id="auth" class="auth">
+  <div class="auth-card">
+    <div class="brand">⚔️ <b>DECodeArena AI</b></div>
+    <small>Learn. Compete. Level Up.</small>
+    <div id="signup">
+      <h1>Create your account</h1><p>Enter your details before entering the Arena.</p>
+      <form id="signupForm">
+        <input id="name" placeholder="Full name" required>
+        <input id="email" type="email" placeholder="Email address" required>
+        <label>Date of birth<input id="dob" type="date" required></label>
+        <input id="password" type="password" minlength="6" placeholder="Password (minimum 6 characters)" required>
+        <button class="primary">Create account & enter dashboard</button>
+      </form>
+      <div id="signupMsg" class="msg"></div>
+      <button id="loginLink" class="link">Already have an account? Login</button>
+    </div>
+    <div id="login" class="hide">
+      <h1>Welcome back</h1><p>Login with your registered email and password.</p>
+      <form id="loginForm">
+        <input id="lemail" type="email" placeholder="Email address" required>
+        <input id="lpassword" type="password" placeholder="Password" required>
+        <button class="primary">Login</button>
+      </form>
+      <div id="loginMsg" class="msg"></div>
+      <button id="signupLink" class="link">New student? Create account</button>
+    </div>
+  </div>
+</section>
+
+<div id="app" class="hide">
+<header>
+  <div class="brand">⚔️ <b>DECodeArena AI</b><small>AI-V2.4</small></div>
+  <nav><button data-page="dashboard">Arena Live</button><button data-page="challenges">Challenges</button><button data-page="compete">Compete</button></nav>
+  <div class="topstats">🔥 <b id="topStreak">0</b> · ⚡ <b id="topLevel">Recruit</b> · XP <b id="topXP">0</b>
+  <button id="bell">🔔</button><button id="avatar">S</button></div>
+</header>
+<div class="layout">
+<aside>
+  <div class="sidebrand">🛡️ <span><b>DECodeArena AI</b><small id="rankText">Rank: Recruit</small></span></div>
+  <button id="quick" class="quick">⚔️ Quick Match</button>
+  <div class="side-nav">
+    <button data-page="dashboard">▣ Dashboard</button><button data-page="ai">🧠 AI Tasks</button>
+    <button data-page="arena">⌨ Code Arena <i>LIVE</i></button><button data-page="squads">👥 Squads</button>
+    <button data-page="leaderboard">🏆 Leaderboard</button><button data-page="skills">📊 Skills Analytics</button>
+    <button data-page="rewards">🎖 Rewards</button><button data-page="planner">📅 Study Planner</button>
+    <button data-page="admin">⚙ Admin</button><button data-page="profile">👤 Profile</button>
+  </div>
+  <div class="sidebottom">🛡️ Code Titans · <b id="sideXP">0 XP</b></div>
+</aside>
+<main>
+<section id="dashboard" class="page">
+  <div class="hero"><div><h1>Good evening, <span id="welcome">Student</span> 👋</h1><p>Your AI learning journey continues today. Next rank: <b id="nextRank">Novice</b> <span id="remaining"></span></p></div>
+  <div class="actions"><button id="heroMatch" class="primary">⚔️ Enter Arena Quick Match</button><button id="coach" class="secondary">🤖 Ask AI Coach</button><button id="plan" class="secondary">📅 Study Plan</button></div></div>
+  <div class="metrics">
+    <article><label>CURRENT RANK</label><strong id="rank">#1</strong><small>Global</small></article>
+    <article><label>TOTAL XP</label><strong id="xp">0</strong><small>XP</small><div class="bar"><span id="xpbar"></span></div></article>
+    <article><label>DAILY STREAK 🔥</label><strong id="streak">0</strong><small>Days Active</small><div id="dots"></div></article>
+    <article><label>TODAY'S GOAL</label><strong id="goal">0%</strong><small id="goalText">0 of 4 missions done</small></article>
+  </div>
+  <div class="grid">
+    <div>
+      <article class="featured"><label>🧠 AI RECOMMENDED FOR YOU</label><h2>Dynamic Programming: Maximum Subarray Optimization</h2><p>Practice Kadane's algorithm, edge cases and time-complexity optimization.</p><div class="tags"><span>Coding</span><span>Java Medium</span><span>+350 XP</span><span>25 mins</span></div><button id="challenge" class="primary">Start AI Challenge →</button> <button id="preview" class="secondary">Preview Test Cases</button></article>
+      <article class="panel"><div class="panelhead"><div><h2>Today's Mission Hub</h2><p>Complete missions to earn XP.</p></div><div id="filters"><button data-filter="all">All</button><button data-filter="coding">Coding</button><button data-filter="logic">Logic</button><button data-filter="language">Language</button></div></div><div id="missions"></div></article>
+      <article class="live"><div><label>🔴 RAPID BLITZ ARENA</label><h3>Students can compete in real-time</h3></div><button id="join" class="primary">Join Live Match (+500 XP)</button></article>
+    </div>
+    <div>
+      <article class="panel"><div class="panelhead"><div><h2>Code Titans</h2><p>Your learning squad</p></div></div><p>Weekly Target: <b id="weekly">0 / 35,000 XP</b></p><div class="bar"><span id="weeklybar"></span></div><div id="roster"></div></article>
+      <article class="panel"><h2>Multi-Skill Mastery</h2><p>Updated from your activity.</p><div id="skills"></div></article>
+      <article class="panel"><h2>Recent Badges</h2><div id="badges" class="badges"></div></article>
+    </div>
+  </div>
+</section>
+<section id="generic" class="page"><div id="genericContent"></div></section>
+</main></div></div>
+
+<div id="modal" class="modal hide"><div class="modal-card"><button id="close">×</button><div id="modalBody"></div></div></div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body></html>
